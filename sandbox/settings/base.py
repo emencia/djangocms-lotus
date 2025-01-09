@@ -152,6 +152,124 @@ LOGOUT_REDIRECT_URL = "/"
 FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 
 
+"""
+Smart media and Sorl parts
+"""
+from smart_media.settings import *  # noqa: E402,F401,F403
+
+INSTALLED_APPS.extend([
+    "sorl.thumbnail",
+    "smart_media",
+])
+
+"""
+CKEditor part
+"""
+INSTALLED_APPS[0:0] = [
+    "ckeditor",
+    "ckeditor_uploader",
+]
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
+CKEDITOR_RESTRICT_BY_DATE = False
+CKEDITOR_IMAGE_BACKEND = "ckeditor_uploader.backends.PillowBackend"
+CKEDITOR_BROWSE_SHOW_DIRS = True
+
+CKEDITOR_CONFIGS = {
+    "lotus": {
+        "width": "100%",
+        "height": 400,
+        "language": "{{ language }}",
+        "skin": "moono-lisa",
+        # Enabled showblocks as default behavior
+        "startupOutlineBlocks": True,
+        # Enable image2 plugin
+        "extraPlugins": "image2",
+        "image_previewText": True,
+        # Disable element filter to enable full HTML5, also this will let
+        # append any code, even bad syntax and malicious code, so be careful
+        "removePlugins": "stylesheetparser",
+        "allowedContent": True,
+        "toolbar": "Default",
+        "toolbar_Default": [
+            ["Undo", "Redo"],
+            ["ShowBlocks"],
+            ["Format", "Styles"],
+            ["RemoveFormat"],
+            "/",
+            ["Bold", "Italic", "Underline", "-", "Subscript", "Superscript"],
+            ["JustifyLeft", "JustifyCenter", "JustifyRight"],
+            ["TextColor"],
+            ["Link", "Unlink"],
+            ["Image", "-", "NumberedList", "BulletedList",
+                "-", "Table", "-", "CreateDiv", "HorizontalRule"],
+            ["Source"],
+        ],
+    },
+}
+
+
+"""
+Text editor configuration
+
+We safely try to use the one from 'djangocms_text' if available else
+'djangocms_text_ckeditor' and finally if none of these are available we don't install
+any apps since we fallback to the builtin Django Textarea widget.
+"""
+try:
+    import djangocms_text  # noqa: F401,F403
+except ImportError:
+    try:
+        import djangocms_text_ckeditor  # noqa: F401,F403
+    except ImportError:
+        pass
+    else:
+        INSTALLED_APPS.extend([
+            "djangocms_text_ckeditor",
+        ])
+else:
+    INSTALLED_APPS.extend([
+        "djangocms_text",
+        "djangocms_text.contrib.text_ckeditor4",
+    ])
+
+    TEXT_EDITOR = "djangocms_text.contrib.text_ckeditor4.ckeditor4"
+
+
+"""
+django-view-breadcrumbs optional part
+"""
+try:
+    import view_breadcrumbs  # noqa: F401
+except ImportError:
+    pass
+else:
+    INSTALLED_APPS[0:0] = [
+        "view_breadcrumbs",
+    ]
+
+
+"""
+django-taggit part
+"""
+INSTALLED_APPS[0:0] = [
+    "dal",
+    "dal_select2",
+]
+INSTALLED_APPS.append(
+    "taggit",
+)
+
+
+"""
+Lotus part
+"""
+from lotus.settings import *  # noqa: E402,F401,F403
+
+INSTALLED_APPS.append(
+    "lotus",
+)
 
 
 """
@@ -196,31 +314,6 @@ CMS_TEMPLATES = [
     ("pages/default.html", "Default"),
 ]
 
-"""
-Text editor configuration
-
-We safely try to use the one from 'djangocms_text' if available else
-'djangocms_text_ckeditor' and finally if none of these are available we don't install
-any apps since we fallback to the builtin Django Textarea widget.
-"""
-try:
-    import djangocms_text  # noqa: F401,F403
-except ImportError:
-    try:
-        import djangocms_text_ckeditor  # noqa: F401,F403
-    except ImportError:
-        pass
-    else:
-        INSTALLED_APPS.extend([
-            "djangocms_text_ckeditor",
-        ])
-else:
-    INSTALLED_APPS.extend([
-        "djangocms_text",
-        "djangocms_text.contrib.text_ckeditor4",
-    ])
-
-    TEXT_EDITOR = "djangocms_text.contrib.text_ckeditor4.ckeditor4"
 
 """
 SPECIFIC BASE APPLICATIONS SETTINGS BELOW

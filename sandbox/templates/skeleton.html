@@ -24,6 +24,26 @@
                     <div class="collapse navbar-collapse" id="main-navbar-toggler">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             {% show_menu 1 100 100 100 "menus/flat.html" %}
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle{% if lotus_stage == "articles" or lotus_stage == "categories" or lotus_stage == "authors" or lotus_stage == "tags" %} active{% endif %}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Lotus
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item{% if lotus_stage == "articles" %} active{% endif %}" href="{% url "lotus:article-index" %}">{% trans "Articles" %}</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item{% if lotus_stage == "categories" %} active{% endif %}" href="{% url "lotus:category-index" %}">{% trans "Categories" %}</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item{% if lotus_stage == "authors" %} active{% endif %}" href="{% url "lotus:author-index" %}">{% trans "Authors" %}</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item{% if lotus_stage == "tags" %} active{% endif %}" href="{% url "lotus:tag-index" %}">{% trans "Tags" %}</a>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
 
                         <div class="d-flex">
@@ -47,4 +67,3 @@
         <script src="{% static "js/main.js" %}"></script>
     {% endspaceless %}</body>
 </html>
-
