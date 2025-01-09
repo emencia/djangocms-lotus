@@ -13,8 +13,8 @@ Dependencies
 ************
 
 * `Python`_>=3.9;
-* `Django`_>=4.2,<5.0;
-* `DjangoCMS`_>=3.11.0,<4.0;
+* `Django`_>=4.2,<5.2;
+* `DjangoCMS`_>=3.11.0;
 
 
 Links

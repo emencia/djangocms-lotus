@@ -4,7 +4,10 @@ Base Django settings for sandbox
 
 from pathlib import Path
 
-from django import VERSION
+# Determine if we are working with DjangoCMS 4
+from packaging.version import Version
+from cms import __version__
+IS_DJANGO_CMS4 = Version(__version__) >= Version("4")
 
 
 SECRET_KEY = "***TOPSECRET***"
@@ -58,13 +61,6 @@ SITE_ID = 1
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
-
-# We want to avoid warning for this settings which is deprecated since Django 4.x but
-# needed for Django<=3.2
-if VERSION[0] < 4:
-    # If you set this to False, Django will not format dates, numbers and
-    # calendars according to the current locale.
-    USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
@@ -161,6 +157,8 @@ FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 """
 DjangoCMS configuration
 """
+# Required since DjangoCMS 4.0
+CMS_CONFIRM_VERSION4 = IS_DJANGO_CMS4
 
 # Admin style need to be put before Django admin
 INSTALLED_APPS[0:0] = [
@@ -173,7 +171,6 @@ INSTALLED_APPS.extend([
     "treebeard",
     "menus",
     "sekizai",
-    "djangocms_text_ckeditor",
 ])
 
 # Enable CMS middlewares
@@ -198,6 +195,32 @@ TEMPLATES[0]["OPTIONS"]["context_processors"].extend([
 CMS_TEMPLATES = [
     ("pages/default.html", "Default"),
 ]
+
+"""
+Text editor configuration
+
+We safely try to use the one from 'djangocms_text' if available else
+'djangocms_text_ckeditor' and finally if none of these are available we don't install
+any apps since we fallback to the builtin Django Textarea widget.
+"""
+try:
+    import djangocms_text  # noqa: F401,F403
+except ImportError:
+    try:
+        import djangocms_text_ckeditor  # noqa: F401,F403
+    except ImportError:
+        pass
+    else:
+        INSTALLED_APPS.extend([
+            "djangocms_text_ckeditor",
+        ])
+else:
+    INSTALLED_APPS.extend([
+        "djangocms_text",
+        "djangocms_text.contrib.text_ckeditor4",
+    ])
+
+    TEXT_EDITOR = "djangocms_text.contrib.text_ckeditor4.ckeditor4"
 
 """
 SPECIFIC BASE APPLICATIONS SETTINGS BELOW
