@@ -1,0 +1,14 @@
+{% load i18n %}
+<div class="article-flux-plugin">
+    <h3>{{ instance.title }} (limit={{ instance.length }})</h3>
+
+    <ul class="plugin-articles">
+    {% for article in articles %}
+        <li>
+            <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+        </li>
+    {% empty %}
+        <li class="empty">{% translate "No articles yet." %}</li>
+    {% endfor %}
+    </ul>
+</div>

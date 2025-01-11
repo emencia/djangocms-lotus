@@ -32,6 +32,10 @@ MANAGERS = ADMINS
 
 DATABASES = {}
 
+# Default primary key field type
+# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ["*"]
@@ -141,7 +145,6 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.staticfiles",
     "django.forms",
-    "djangocms_lotus.apps.djangocms_lotusConfig",
 ]
 
 LOGIN_REDIRECT_URL = "/"
@@ -316,6 +319,8 @@ CMS_TEMPLATES = [
 
 
 """
-SPECIFIC BASE APPLICATIONS SETTINGS BELOW
+SPECIFIC BASE APPLICATION SETTINGS BELOW
 """
 from djangocms_lotus.settings import *  # noqa: E402,F401,F403
+
+INSTALLED_APPS.append("djangocms_lotus")

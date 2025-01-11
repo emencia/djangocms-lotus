@@ -33,12 +33,12 @@ help:
 	@echo "  ========"
 	@echo
 	@echo "  clean                      -- to clean EVERYTHING (Warning)"
-	@echo "  clean-var                  -- to clean data (uploaded medias, database, etc..)"
-	@echo "  clean-doc                  -- to remove documentation builds"
 	@echo "  clean-backend-install      -- to clean Python side installation"
-	@echo "  clean-frontend-install     -- to clean frontend installation"
+	@echo "  clean-doc                  -- to remove documentation builds"
 	@echo "  clean-frontend-build       -- to clean frontend built files"
+	@echo "  clean-frontend-install     -- to clean frontend installation"
 	@echo "  clean-pycache              -- to recursively remove all Python cache files"
+	@echo "  clean-var                  -- to clean data (uploaded medias, database, etc..)"
 	@echo
 	@echo "  Documentation"
 	@echo "  ============="
@@ -49,31 +49,33 @@ help:
 	@echo "  Installation"
 	@echo "  ============"
 	@echo
-	@echo "  freeze-dependencies        -- to write installed dependencies versions in frozen.txt"
 	@echo "  install                    -- to install this project with virtualenv and Pip"
+	@echo "  freeze-dependencies        -- to write installed dependencies versions in frozen.txt"
 	@echo
 	@echo "  Django commands"
 	@echo "  ==============="
 	@echo
-	@echo "  run                        -- to run Django development server"
 	@echo "  check-migrations           -- to check for pending application migrations (do not write anything)"
-	@echo "  migrations                 -- to create new migrations for application after changes"
+	@echo "  demo                          -- to fill database with demo datas (this will flush all Lotus data)"
+	@echo "  demo-minimal                  -- to fill database with minimal demo datas (this will flush all Lotus data)"
 	@echo "  migrate                    -- to apply demo database migrations"
-	@echo "  superuser                  -- to create a superuser for Django admin"
+	@echo "  migrations                 -- to create new migrations for application after changes"
 	@echo "  po                         -- to update every PO files from application for enabled languages"
 	@echo "  mo                         -- to build MO files from application PO files"
+	@echo "  run                        -- to run Django development server"
+	@echo "  superuser                  -- to create a superuser for Django admin"
 	@echo
 	@echo "  Frontend commands"
 	@echo "  ================="
 	@echo
 	@echo "  css                        -- to build uncompressed CSS from Sass sources"
-	@echo "  watch-css                  -- to watch for Sass changes to rebuild CSS"
 	@echo "  css-prod                   -- to build compressed and minified CSS from Sass sources"
-	@echo "  js                         -- to build uncompressed Javascript from sources"
-	@echo "  watch-js                   -- to watch for Javascript sources changes to rebuild assets"
-	@echo "  js-prod                    -- to build minified JS assets"
 	@echo "  frontend                   -- to build uncompressed frontend assets (CSS, JS, etc..)"
 	@echo "  frontend-prod              -- to build minified frontend assets (CSS, JS, etc..)"
+	@echo "  js                         -- to build uncompressed Javascript from sources"
+	@echo "  js-prod                    -- to build minified JS assets"
+	@echo "  watch-css                  -- to watch for Sass changes to rebuild CSS"
+	@echo "  watch-js                   -- to watch for Javascript sources changes to rebuild assets"
 	@echo
 	@echo "  Quality"
 	@echo "  ======="
@@ -162,6 +164,7 @@ install-backend:
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Install everything for development <---$(FORMATRESET)\n"
 	@echo ""
+	$(PIP_BIN) install psycopg2
 	$(PIP_BIN) install -e .[dev,quality,doc,doc-live,release]
 .PHONY: install-backend
 
@@ -193,8 +196,7 @@ check-migrations:
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Checking for pending backend model migrations <---$(FORMATRESET)\n"
 	@echo ""
-	$(PYTHON_BIN) $(DJANGO_MANAGE) makemigrations --dry-run -v 3 $(APPLICATION_NAME)
-	$(PYTHON_BIN) $(DJANGO_MANAGE) makemigrations --check -v 3 $(APPLICATION_NAME)
+	$(PYTHON_BIN) $(DJANGO_MANAGE) makemigrations --check --dry-run -v 3 $(APPLICATION_NAME)
 .PHONY: check-migrations
 
 migrate:
@@ -210,6 +212,20 @@ superuser:
 	@echo ""
 	$(PYTHON_BIN) $(DJANGO_MANAGE) createsuperuser
 .PHONY: superuser
+
+demo:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Filling with demo datas <---$(FORMATRESET)\n"
+	@echo ""
+	$(PYTHON_BIN) $(DJANGO_MANAGE) lotus_demo --flush-all --translation=fr
+.PHONY: demo
+
+demo-minimal:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Filling with minimal demo datas <---$(FORMATRESET)\n"
+	@echo ""
+	$(PYTHON_BIN) $(DJANGO_MANAGE) lotus_demo --flush-all --albums=4 --item-per-album=3 --authors=2 --categories=2 --tags=2 --tag-per-article=1 --articles=8
+.PHONY: demo-minimal
 
 run:
 	@echo ""

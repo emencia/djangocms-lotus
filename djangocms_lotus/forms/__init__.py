@@ -1,6 +1,6 @@
-from .blog import BlogPluginForm
+from .article import ArticleFluxForm
 
 
 __all__ = [
-    "BlogPluginForm",
+    "ArticleFluxForm",
 ]

@@ -1,9 +1,6 @@
-from .blog import Blog, BlogPluginModel
-from .article import Article
+from .article import ArticleFlux
 
 
 __all__ = [
-    "Blog",
-    "BlogPluginModel",
-    "Article",
+    "ArticleFlux",
 ]

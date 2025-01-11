@@ -6,14 +6,14 @@ These are the default settings you can override in your own project settings
 right after the line which load the default app settings.
 
 """
-BLOG_PAGINATION = 5
+CMSLOTUS_ARTICLE_FLUX_TEMPLATES = (
+    ("djangocms_lotus/article-flux/default.html", "Default"),
+)
 """
-Blog entry per page limit for pagination, set it to ``None`` to disable
-pagination.
+List of template choices available to render Article flux plugin.
 """
 
-ARTICLE_PAGINATION = 6
+CMSLOTUS_ARTICLE_FLUX_LIMIT_DEFAULT = 5
 """
-Article entry per page limit for pagination, set it to ``None`` to disable
-pagination.
+Default limit of articles to display in Article flux plugin.
 """

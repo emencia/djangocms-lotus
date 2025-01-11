@@ -3,7 +3,8 @@ CMS Plugins installations
 """
 from cms.plugin_pool import plugin_pool
 
-from .plugins.blog import BlogPlugin
+from .plugins.articleflux import ArticleFluxPlugin
 
 
-plugin_pool.register_plugin(BlogPlugin)
+# Register plugins
+plugin_pool.register_plugin(ArticleFluxPlugin)
