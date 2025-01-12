@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
                 (
                     "title",
                     models.CharField(
-                        blank=True, default="", max_length=150, verbose_name="title"
+                        default="", max_length=150, verbose_name="title"
                     ),
                 ),
                 (

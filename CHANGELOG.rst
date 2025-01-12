@@ -14,6 +14,8 @@ Development
     * [ ] Categories choices with language in plugin admin form;
     * [ ] Could we post-save clean category choices depending target language during plugin
       form save ?
+    * [ ] django debug toolbar should be conditionnated to its install and moved from
+      ``[dev]`` requirement in a new extra requirement (like ``djdt`` or ``debug``);
 
 * Adjusted requirements for Lotus;
 * Adjusted Django and Python supports;

@@ -165,7 +165,7 @@ install-backend:
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Install everything for development <---$(FORMATRESET)\n"
 	@echo ""
 	$(PIP_BIN) install psycopg2
-	$(PIP_BIN) install -e .[dev,quality,doc,doc-live,release]
+	$(PIP_BIN) install -e .[dev,debug,quality,doc,doc-live,release]
 .PHONY: install-backend
 
 install-frontend:

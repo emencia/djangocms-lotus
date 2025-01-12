@@ -28,7 +28,6 @@ class ArticleFlux(CMSPlugin):
 
     title = models.CharField(
         _("title"),
-        blank=True,
         max_length=150,
         default="",
     )
