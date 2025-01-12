@@ -1,14 +1,41 @@
-{% load i18n %}
+{% load i18n %}{% spaceless %}
 <div class="article-flux-plugin">
-    <h3>{{ instance.title }} (limit={{ instance.length }})</h3>
+    <h3>{{ instance.title }}</h3>
+
+    {% with categories=from_categories %}
+        {% if categories %}
+            <div class="plugin-tags hstack gap-2 bg-primary-subtle text-primary-emphasis py-1 px-2 rounded mb-2">
+                <small><b>Categories</b></small>
+                {% for category in categories %}
+                    <a href="{{ category.get_absolute_url }}">
+                        <span class="badge text-bg-info">{{ category.title }}</span>
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {% with tags=from_tags %}
+        {% if tags %}
+            <div class="plugin-tags hstack gap-2 bg-secondary-subtle text-secondary-emphasis py-1 px-2 rounded mb-2">
+                <small><b>Tags</b></small>
+                {% for tag in tags %}
+                    <a href="{% url "lotus:tag-detail" tag.slug %}">
+                        <span class="badge text-bg-secondary">{{ tag.name }}</span>
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
 
     <ul class="plugin-articles">
-    {% for article in articles %}
-        <li>
-            <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-        </li>
-    {% empty %}
-        <li class="empty">{% translate "No articles yet." %}</li>
-    {% endfor %}
+        {% for article in articles %}
+            <li>
+                <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+            </li>
+        {% empty %}
+            <li class="empty">{% translate "No articles yet." %}</li>
+        {% endfor %}
     </ul>
 </div>
+{% endspaceless %}
