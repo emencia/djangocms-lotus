@@ -1,12 +1,15 @@
 .. _Python: https://www.python.org/
 .. _Django: https://www.djangoproject.com/
-.. _DjangoCMS: https://docs.django-cms.org/en/release-3.11.x/
+.. _DjangoCMS: https://docs.django-cms.org/
+.. _Django Blog Lotus: https://django-blog-lotus.readthedocs.io/
 
-===================
-Lotus for DjangoCMS
-===================
+===============================
+Django Blog Lotus for DjangoCMS
+===============================
 
-Lotus integration for DjangoCMS
+`Django Blog Lotus`_ integration for DjangoCMS provides:
+
+* A plugin to include the X latest entries with some filters;
 
 
 Dependencies
@@ -15,6 +18,7 @@ Dependencies
 * `Python`_>=3.10;
 * `Django`_>=4.2,<5.2;
 * `DjangoCMS`_>=4.1.0;
+* `Django Blog Lotus`_>=0.9.0;
 
 
 Links
