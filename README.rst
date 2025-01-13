@@ -12,9 +12,9 @@ Lotus integration for DjangoCMS
 Dependencies
 ************
 
-* `Python`_>=3.9;
+* `Python`_>=3.10;
 * `Django`_>=4.2,<5.2;
-* `DjangoCMS`_>=3.11.0;
+* `DjangoCMS`_>=4.1.0;
 
 
 Links

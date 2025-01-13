@@ -9,9 +9,5 @@ These are the model object factories made with
 model object creation.
 
 .. automodule:: djangocms_lotus.factories.article
-    :members: ArticleFactory
-    :undoc-members:
-
-.. automodule:: djangocms_lotus.factories.blog
-    :members: BlogFactory, BlogPluginModelFactory
+    :members: ArticleFluxFactory
     :undoc-members:

@@ -67,11 +67,11 @@ def test_factory_relations(db):
             CategoryFactory(slug="foo"),
             CategoryFactory(slug="baguette", language="fr"),
         ],
-        from_tags=[TagFactory(slug="bar")],
+        from_tags=[TagFactory(slug="ping")],
     )
 
     categories = [(item.slug, item.language) for item in flux.from_categories.all()]
     assert categories == [("foo", "en"), ("baguette", "fr")]
 
     tags = [item.slug for item in flux.from_tags.all()]
-    assert tags == ["bar"]
+    assert tags == ["ping"]

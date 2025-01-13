@@ -7,7 +7,7 @@ References
 .. toctree::
    :maxdepth: 2
 
-   factories.rst
    models.rst
+   factories.rst
+   forms.rst
    plugins.rst
-   views.rst
