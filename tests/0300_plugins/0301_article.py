@@ -36,34 +36,6 @@ def test_get_form_view_add(db, client, settings):
     # Expected http success status
     assert response.status_code == 200
 
-    # Parse resulting plugin form and collect input and select form elements
+    # Expected form in response HTML
     dom = html_pyquery(response)
-    inputs = sorted(
-        [
-            item.get("name")
-            for item in dom.find("#articleflux_form input, #articleflux_form select")
-        ]
-    )
-    assert inputs == [
-        "_popup",
-        "_save",
-        "csrfmiddlewaretoken",
-        "featured_only",
-        "from_categories",
-        "from_tags",
-        "length",
-        "template",
-        "title",
-    ]
-
-    categories = [
-        item.text
-        for item in dom.find("#articleflux_form #id_from_categories option")
-    ]
-    assert categories == ["bar", "foo"]
-
-    tags = [
-        item.text
-        for item in dom.find("#articleflux_form #id_from_tags option")
-    ]
-    assert tags == ["ping"]
+    assert len(dom.find("#articleflux_form")) == 1

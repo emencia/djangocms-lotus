@@ -3,7 +3,7 @@ from lotus.factories import CategoryFactory, TagFactory
 from djangocms_lotus.choices import get_latestflux_template_default
 from djangocms_lotus.forms import ArticleFluxForm
 from djangocms_lotus.models import ArticleFlux
-from djangocms_lotus.utils.tests import flatten_form_errors
+from djangocms_lotus.utils.tests import flatten_form_errors, html_pyquery
 
 
 def test_empty(db):
@@ -46,7 +46,45 @@ def test_invalid(db):
     }
 
 
-def test_valid(client, db, settings):
+def test_fields(db):
+    """
+    Form should contains all expected fields.
+    """
+    foo = CategoryFactory(title="foo")
+    bar = CategoryFactory(title="bar", language="fr")
+    ping = TagFactory(name="ping")
+
+    f = ArticleFluxForm()
+    html = f.as_p()
+
+    dom = html_pyquery(html)
+    inputs = sorted([
+        item.get("name")
+        for item in dom.find("input, select")
+    ])
+    assert inputs == [
+        "featured_only",
+        "from_categories",
+        "from_tags",
+        "length",
+        "template",
+        "title",
+    ]
+
+    categories = [
+        item.text
+        for item in dom.find("#id_from_categories option")
+    ]
+    assert categories == [bar.title, foo.title]
+
+    tags = [
+        item.text
+        for item in dom.find("#id_from_tags option")
+    ]
+    assert tags == [ping.name]
+
+
+def test_valid(db):
     """
     Form with correct data should succeed and save object.
     """
