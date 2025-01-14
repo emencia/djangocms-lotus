@@ -4,6 +4,9 @@ timezone instead of Pytz.
 
 This module should safely load ``zoneinfo`` library to import ``ZoneInfo`` class
 for ``Django>=3.8``.
+
+DEPRECATED: Since this package does only support Python>=3.10, this compatibility layer
+is obsolete.
 """
 try:
     from zoneinfo import ZoneInfo  # noqa: F401,F403

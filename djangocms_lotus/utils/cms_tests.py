@@ -18,6 +18,12 @@ def cms_page_create_helper(title, template, author, language=None, reverse_id=No
     Since DjangoCMS 4 has hardly leveled up the way to programmatically create a page
     and publish it, we need some helper around their programmatic API (sigh).
 
+    .. Note::
+        Currently i don't know how to publish page when "djangocms_versioning" is not
+        installed, it may even be automatically published since there is no version.
+        It seems a very possible behavior because from tests the plugin render is
+        working without versionning.
+
     Arguments:
         title (string): Page content title.
         template (string): Page content template
@@ -52,10 +58,9 @@ def cms_page_create_helper(title, template, author, language=None, reverse_id=No
         manager="admin_manager"
     ).latest_content().last()
 
+    version = None
     if Version:
         version = Version.objects.get(object_id=page_content.id)
-    else:
-        None
 
     if publish and version:
         version.publish(author)

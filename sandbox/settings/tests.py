@@ -10,6 +10,12 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.dummy.DummyCache",
+    }
+}
+
 # Media directory dedicated to tests to avoid polluting other environment
 # media directory
 MEDIA_ROOT = VAR_PATH / "media-tests"  # noqa: F405

@@ -25,8 +25,8 @@ Development
     * [~] Test coverage;
       * [x] Models;
       * [x] Factories;
-      * [ ] Plugin form;
-      * [ ] Plugin render (watch for performed sql queries);
+      * [x] Plugin form;
+      * [x] Plugin render (watch for performed sql queries);
     * [ ] Categories choices with language in plugin admin form;
     * [ ] We could post-save clean category choices depending target language during
       plugin form save ?
@@ -41,6 +41,8 @@ Development
 
 * Adjusted requirements for Lotus, Django and Python supports;
 * Added first working version for plugin "Article flux";
+* Template for plugin "Article flux" include the Lotus article item template to list
+  articles so the same look and feel is adopted;
 * Included stylesheet patch (for django-admin-style) for Lotus admin category tree view;
 * Added 'django-debug-toolbar' to the development requirements;
 * Added test coverage for models, factories, forms;
