@@ -1,13 +1,18 @@
 {
     "name": "Lotus for DjangoCMS frontend",
     "version": "0.1.0",
-    "description": "The project frontend.",
+    "description": "Frontend for both application and sandbox assets",
     "author": "Emencia <support@emencia.com>",
     "private": true,
     "scripts": {
         "css": "sass --load-path=./node_modules --silence-deprecation=color-functions --silence-deprecation=global-builtin --silence-deprecation=import --silence-deprecation=mixed-decls ./scss/:../sandbox/static-sources/css/",
         "css-prod": "sass --style compressed --load-path=./node_modules ./scss/:../sandbox/static-sources/css/",
         "watch-css": "nodemon --watch scss/ --ext scss --exec \"npm run-script css\"",
+
+        "app-css": "sass --load-path=./node_modules --silence-deprecation=color-functions --silence-deprecation=global-builtin --silence-deprecation=import --silence-deprecation=mixed-decls ./app-scss/:../djangocms_lotus/static/css/",
+        "app-css-prod": "sass --style compressed --load-path=./node_modules ./app-scss/:../djangocms_lotus/static/css/",
+        "watch-app-css": "nodemon --watch app-scss/ --ext scss --exec \"npm run-script app-css\"",
+
         "js": "webpack --mode development --progress",
         "js-prod": "webpack --mode production --progress",
         "watch-js": "nodemon --watch js/ --ext js --exec \"npm run-script js\""

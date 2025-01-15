@@ -252,21 +252,28 @@ css:
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Building CSS for development environment <---$(FORMATRESET)\n"
 	@echo ""
-	cd $(FRONTEND_DIR) && npm run-script css
+	cd $(FRONTEND_DIR) && npm run-script css && npm run-script app-css
 .PHONY: css
 
 watch-sass:
 	@echo ""
-	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Watching Sass sources for development environment <---$(FORMATRESET)\n"
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Watching Sandbox Sass sources for development environment <---$(FORMATRESET)\n"
 	@echo ""
 	cd $(FRONTEND_DIR) && npm run-script watch-css
+.PHONY: watch-sass
+
+watch-app-sass:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Watching Application Sass sources for development environment <---$(FORMATRESET)\n"
+	@echo ""
+	cd $(FRONTEND_DIR) && npm run-script watch-app-css
 .PHONY: watch-sass
 
 css-prod:
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Building CSS for production environment <---$(FORMATRESET)\n"
 	@echo ""
-	cd $(FRONTEND_DIR) && npm run-script css-prod
+	cd $(FRONTEND_DIR) && npm run-script css-prod && npm run-script app-css-prod
 .PHONY: css-prod
 
 js:

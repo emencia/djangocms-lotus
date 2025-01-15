@@ -1,7 +1,7 @@
+from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
 from cms.plugin_base import CMSPluginBase
-
 from lotus.models import Article
 from lotus.views.mixins import ArticleFilterAbstractView
 
@@ -18,6 +18,10 @@ class ArticleFluxPlugin(CMSPluginBase):
     render_template = get_latestflux_template_default()
     cache = True
 
+    class Media:
+        css = settings.CMSLOTUS_ADMIN_ARTICLE_FLUX_ASSETS.get("css", None)
+        js = settings.CMSLOTUS_ADMIN_ARTICLE_FLUX_ASSETS.get("js", None)
+
     def get_fieldsets(self, request, obj=None):
         """
         Define plugin form fieldsets
@@ -33,13 +37,8 @@ class ArticleFluxPlugin(CMSPluginBase):
             }),
             (_("Options"), {
                 "fields": (
-                    "template",
-                    "length",
                     "featured_only",
-                ),
-            }),
-            (_("Relations"), {
-                "fields": (
+                    ("template", "length"),
                     "from_categories",
                     "from_tags",
                 ),
@@ -66,11 +65,9 @@ class ArticleFluxPlugin(CMSPluginBase):
         if instance.featured_only is True:
             articles = articles.exclude(featured=False)
 
-        # print("🎨 from_categories:", from_categories)
         if from_categories:
             articles = articles.filter(categories__in=from_categories)
 
-        # print("🎨 from_tags:", from_tags)
         if from_tags:
             articles = articles.filter(tags__in=from_tags)
 

@@ -324,3 +324,8 @@ SPECIFIC BASE APPLICATION SETTINGS BELOW
 from djangocms_lotus.settings import *  # noqa: E402,F401,F403
 
 INSTALLED_APPS.append("djangocms_lotus")
+
+# Use the patched stylesheet for Lotus with django-admin-style
+LOTUS_ADMIN_ALBUM_ASSETS["css"]["all"] = ("css/cmslotus-admin/lotus-admin.css",)
+LOTUS_ADMIN_ARTICLE_ASSETS["css"]["all"] = ("css/cmslotus-admin/lotus-admin.css",)
+LOTUS_ADMIN_CATEGORY_ASSETS["css"]["all"] = ("css/cmslotus-admin/lotus-admin.css",)

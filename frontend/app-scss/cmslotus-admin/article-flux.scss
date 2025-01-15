@@ -1,0 +1,63 @@
+//
+// Some stylesheet to override and adjust layout for 'djangocms-lotus' plugin forms in
+// the context of 'django-admin-styles'
+//
+
+.djangocms-admin-style {
+    &.model-articleflux {
+        #content {
+            // Hide plugin title that seems useless and take too much vertical space
+            & > h2 {
+                display: none;
+            }
+        }
+    }
+
+    #articleflux_form {
+        // admin-styles add useless float that cause too small input width
+        .field-template,
+        .field-length {
+            float: none;
+        }
+
+        // Adjust FilteredSelectMultiple widget layout against django-admin-styles
+        .field-from_categories,
+        .field-from_tags {
+            // admin-styles disable the flexbox behavior but we need it to re-order
+            // label and input
+            .flex-container {
+                display: flex;
+                flex-direction: column;
+
+                label {
+                    order: 1;
+                }
+
+                .selector {
+                    order: 2;
+                    // Width is too small
+                    width: 100%;
+                    max-width: 1024px;
+
+                    // Uppercase title is visually annoying
+                    h2 {
+                        text-transform: none;
+                    }
+
+                    // Bugged border
+                    .selector-chooser {
+                        border-bottom: 0;
+                    }
+
+                    select[multiple] {
+                        option {
+                            // admin-styles apply a full width which cause useless
+                            // horizontal scrolling inside select input
+                            width: auto;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

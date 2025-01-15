@@ -27,11 +27,14 @@ Development
       * [x] Factories;
       * [x] Plugin form;
       * [x] Plugin render (watch for performed sql queries);
-    * [ ] Categories choices with language in plugin admin form;
+    * [x] Categories choices with language in plugin admin form;
     * [ ] We could post-save clean category choices depending target language during
       plugin form save ?
-    * [ ] django debug toolbar must be conditionnated to its install and moved from
+    * [x] django debug toolbar must be conditionnated to its install and moved from
       ``[dev]`` requirement in a new extra requirement (like ``djdt`` or ``debug``);
+    * [ ] Backport admin stylesheet fix to Lotus for django-admin-style compatibility
+      since this is only about to push style rules inside selector
+      ``.djangocms-admin-style.app-lotus #content ...``;
 
 * Started with supports:
 
@@ -43,9 +46,16 @@ Development
 * Added first working version for plugin "Article flux";
 * Template for plugin "Article flux" include the Lotus article item template to list
   articles so the same look and feel is adopted;
-* Included stylesheet patch (for django-admin-style) for Lotus admin category tree view;
+* Included stylesheet patch (for django-admin-style) for Lotus admin category tree
+  view. This may be temporary because Lotus may include patch in futur release. So for
+  now the Lotus settings for admin form CSS have to be changed to use the right path: ::
+
+    LOTUS_ADMIN_ALBUM_ASSETS["css"]["all"] = ("css/cmslotus-admin/lotus-admin.css",)
+    LOTUS_ADMIN_ARTICLE_ASSETS["css"]["all"] = ("css/cmslotus-admin/lotus-admin.css",)
+    LOTUS_ADMIN_CATEGORY_ASSETS["css"]["all"] = ("css/cmslotus-admin/lotus-admin.css",)
+
 * Added 'django-debug-toolbar' to the development requirements;
-* Added test coverage for models, factories, forms;
+* Added test coverage for ArticleFlux model, factory, form and plugin;
 
 
 Version 0.1.0 - Unreleased
