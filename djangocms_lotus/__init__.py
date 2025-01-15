@@ -1,4 +1,4 @@
-"""Lotus integration for DjangoCMS"""
+"""Django Blog Lotus for DjangoCMS"""
 from importlib.metadata import version
 
 

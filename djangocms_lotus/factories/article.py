@@ -9,7 +9,7 @@ from ..models import ArticleFlux
 
 class ArticleFluxFactory(factory.django.DjangoModelFactory):
     """
-    Factory to create instance of a ArticleFlux.
+    Factory to create instance of an ``ArticleFlux`` object.
     """
     title = factory.Faker("text", max_nb_chars=20)
     template = get_latestflux_template_default()

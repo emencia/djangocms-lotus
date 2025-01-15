@@ -11,12 +11,15 @@ from ..models import ArticleFlux
 
 
 class ArticleFluxPlugin(CMSPluginBase):
+    """
+    DjangoCMS plugin publisher for ``ArticleFlux``.
+    """
     module = _("Lotus")
     name = _("Article flux")
     model = ArticleFlux
     form = ArticleFluxForm
     render_template = get_latestflux_template_default()
-    cache = True
+    cache = False
 
     class Media:
         css = settings.CMSLOTUS_ADMIN_ARTICLE_FLUX_ASSETS.get("css", None)
@@ -24,10 +27,11 @@ class ArticleFluxPlugin(CMSPluginBase):
 
     def get_fieldsets(self, request, obj=None):
         """
-        Define plugin form fieldsets
+        Define plugin form fieldsets.
 
-        TODO: Template may be hidden when there is only a single choice since it will
-        be forced as default.
+        .. todo::
+            Template may be hidden when there is only a single choice since it will
+            be forced as default.
         """
         fieldsets = [
             (None, {

@@ -50,8 +50,8 @@ def test_fields(db):
     """
     Form should contains all expected fields.
     """
-    foo = CategoryFactory(title="foo")
-    bar = CategoryFactory(title="bar", language="fr")
+    CategoryFactory(title="foo")
+    CategoryFactory(title="bar", language="fr")
     ping = TagFactory(name="ping")
 
     f = ArticleFluxForm()
@@ -75,7 +75,7 @@ def test_fields(db):
         item.text
         for item in dom.find("#id_from_categories option")
     ]
-    assert categories == [bar.title, foo.title]
+    assert categories == ["bar [Français]", "foo [English]"]
 
     tags = [
         item.text

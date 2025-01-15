@@ -12,7 +12,7 @@ from ..choices import (
 
 class ArticleFlux(CMSPlugin):
     """
-    Article flux plugin parameters.
+    Model for ``ArticleFlux`` plugin parameters.
 
     Attributes:
         title (models.CharField): An optional title string.

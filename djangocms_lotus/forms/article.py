@@ -10,7 +10,7 @@ from ..models.article import ArticleFlux
 
 class ArticleFluxForm(forms.ModelForm):
     """
-    TODO: Categories should be listed with their language in '[..]'
+    Form controller for plugin ``ArticleFlux``.
     """
     class Meta:
         model = ArticleFlux

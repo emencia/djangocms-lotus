@@ -7,16 +7,15 @@
 Django Blog Lotus for DjangoCMS
 ===============================
 
-`Django Blog Lotus`_ integration for DjangoCMS provides:
-
-* A plugin to include the X latest entries with some filters;
+`Django Blog Lotus`_ integration for DjangoCMS provides a plugin "Article flux" to
+include the X latest entries with some filtering options.
 
 
 Dependencies
 ************
 
-* `Python`_>=3.10;
-* `Django`_>=4.2,<5.2;
+* `Python`_>=3.9;
+* `Django`_>=4.2;
 * `DjangoCMS`_>=4.1.0;
 * `Django Blog Lotus`_>=0.9.0;
 

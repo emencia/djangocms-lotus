@@ -1,4 +1,4 @@
-# Frozen requirement versions for 'djangocms-lotus==0.2.0rc6' installation
+# Frozen requirement versions for 'djangocms-lotus==0.2.0' installation
 django==5.0.10
 django-cms==4.1.4
 django-blog-lotus==0.9.2
@@ -8,6 +8,7 @@ pytest-django==4.9.0
 factory-boy==3.3.1
 pyquery==2.0.1
 freezegun==1.5.1
+# From extra requirements 'debug'
 django-debug-toolbar==4.4.6
 # From extra requirements 'quality'
 flake8==7.1.1
