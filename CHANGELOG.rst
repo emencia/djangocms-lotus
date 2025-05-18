@@ -3,6 +3,20 @@
 Changelog
 =========
 
+Version 0.3.0 - 2025/05/18
+**************************
+
+* Added 'pyproject.toml' file to fix PIP warnings about editable install but package
+  config is still in 'setup.cfg' for now;
+* Moved 'manage.py' script at root of repository to fix issue with latest PIP and
+  setuptools versions that changed how *editable* install works (the sandbox was
+  missing from PYTHONPATH). This have no impact on package itself, it is just for
+  development;
+* Added support for Django 5.2;
+* Upgraded sandbox frontend to Bootstrap 5.3.6;
+* Dropped support for Python 3.9;
+
+
 Version 0.2.0 - 2025/01/15
 **************************
 

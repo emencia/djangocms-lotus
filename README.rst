@@ -14,7 +14,7 @@ include the X latest entries with some filtering options.
 Dependencies
 ************
 
-* `Python`_>=3.9;
+* `Python`_>=3.10;
 * `Django`_>=4.2;
 * `DjangoCMS`_>=4.1.0;
 * `Django Blog Lotus`_>=0.9.0;
