@@ -12,9 +12,10 @@ Version 0.3.0 - 2025/05/18
   setuptools versions that changed how *editable* install works (the sandbox was
   missing from PYTHONPATH). This have no impact on package itself, it is just for
   development;
+* Removed useless 'urls.py' file from application;
 * Added support for Django 5.2;
-* Upgraded sandbox frontend to Bootstrap 5.3.6;
 * Dropped support for Python 3.9;
+* Upgraded sandbox frontend to Bootstrap 5.3.6;
 
 
 Version 0.2.0 - 2025/01/15

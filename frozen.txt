@@ -1,4 +1,4 @@
-# Frozen requirement versions for 'djangocms-lotus==0.3.0rc1' installation
+# Frozen requirement versions for 'djangocms-lotus==0.3.0' installation
 django==5.2.1
 django-cms==5.0.0
 django-blog-lotus==0.9.3.1
